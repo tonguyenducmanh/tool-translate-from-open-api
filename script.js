@@ -8,6 +8,7 @@ import translateByOpenAI from "./translateByOpenAI.js";
 import originalLangObject from "./input/originalLangObjectShort.js";
 
 async function main() {
+  let startTime = performance.now();
   await fs.writeFile(config.outputPath, "", (err) => {
     if (err) throw err;
   });
@@ -40,6 +41,15 @@ async function main() {
     }
   }
   await mergeJson();
+  // đo đạc thời gian chạy
+  let endTime = performance.now();
+  await fs.writeFile(
+    config.outputLogPath,
+    `${config.logTime + Math.floor(endTime - startTime) / 1000 / 60} phút`,
+    (err) => {
+      if (err) throw err;
+    }
+  );
 }
 // tính toán số lần cần call api
 main();

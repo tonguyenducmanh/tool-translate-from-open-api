@@ -1,7 +1,3 @@
-/**
- * object ngắn để test
- */
-
 export default {
   CompareSAInvoiceAndPayment_sarefdate: "Receivable voucher",
   CompareSAInvoiceAndPayment_saposted_date: "Receivable voucher",

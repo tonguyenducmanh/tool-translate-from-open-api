@@ -4,7 +4,8 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "serve": "node script.js"
+    "serve": "node script.js",
+    "mergeJson":"node mergeJson.js"
   },
   "author": "",
   "license": "ISC",
