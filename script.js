@@ -64,7 +64,7 @@ async function runTool() {
       config.outputLogPath,
       config.logTime.replace(
         config.keyReplace,
-        Math.floor(endTime - startTime) / 1000 / 60
+        Math.ceil((endTime - startTime) / 1000 / 60)
       ),
       (err) => {
         if (err) throw err;
