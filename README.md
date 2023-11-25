@@ -1,7 +1,9 @@
 ## Tool giúp dịch value của object sang ngôn ngữ đích bằng openAI
 
 ```
-Đầu tiên vào trong open ai tạo 2 tài khoản để có được 2 secret key, sau đó gán vào trong mảng secretKey này, limitLine sẽ là giới hạn để mỗi key thực hiện dịch, sau đó đổi chỗ cho nhau.
+Đầu tiên vào trong open ai tạo 2 tài khoản để có được 2 secret key,
+sau đó gán vào trong mảng secretKey này, limitLine sẽ là giới hạn để mỗi key thực hiện dịch,
+sau đó đổi chỗ cho nhau.
 ```
 
 ![Ảnh config](images/read-config.png)
