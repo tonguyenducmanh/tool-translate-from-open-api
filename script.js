@@ -11,6 +11,11 @@ import translateByOpenAI from "./subFunction/translateByOpenAI.js";
 // import originalLangObject from "./input/testObject.js";
 import originalLangObject from "./input/testObjectMultiLevel.js";
 
+// thêm cờ nhận biết có gọi vào chat gpt không
+let callChatGpt = true;
+if (process.argv[2] && process.argv[2] === "-f") {
+  callChatGpt = false;
+}
 /**
  * hàm chạy chính của chương trình
  */
@@ -18,59 +23,61 @@ async function runTool() {
   // bắt đầu đo hiệu năng
   let startTime = performance.now();
 
-  if (config && originalLangObject) {
-    // xóa trắng file output thô đi để ghi nhiều lần
-    await fs.writeFile(config.outputPath, "", (err) => {
-      if (err) throw err;
-    });
+  if (callChatGpt) {
+    if (config && originalLangObject) {
+      // xóa trắng file output thô đi để ghi nhiều lần
+      await fs.writeFile(config.outputPath, "", (err) => {
+        if (err) throw err;
+      });
 
-    // trải phẳng object nhiều cấp thành object 1 cấp, chỉ giữ lại key value cấp nhỏ nhất
-    let flattenObject = prepareDataBeforeTranslate(originalLangObject);
-    if (config.limitLine && flattenObject) {
-      // tính toán số lần gọi openAI
-      let objectKeys = Object.keys(flattenObject);
-      let pages = Math.ceil(objectKeys.length / config.limitLine);
-      if (pages > 0) {
-        let count = 0;
-        // chia queue để đẩy lên dịch theo limit
-        for (let i = 0; i < pages; i++) {
-          let queueObject = Object.fromEntries(
-            Object.entries(flattenObject).slice(
-              i * config.limitLine,
-              i * config.limitLine + config.limitLine
-            )
-          );
-          let result = await translateByOpenAI(queueObject, count);
-          count++;
-          // lưu vào file kết quả
-          if (result) {
-            await fs.appendFile(
-              config.outputPath,
-              result + config.splitResultChar,
-              (err) => {
-                if (err) throw err;
-              }
+      // trải phẳng object nhiều cấp thành object 1 cấp, chỉ giữ lại key value cấp nhỏ nhất
+      let flattenObject = prepareDataBeforeTranslate(originalLangObject);
+      if (config.limitLine && flattenObject) {
+        // tính toán số lần gọi openAI
+        let objectKeys = Object.keys(flattenObject);
+        let pages = Math.ceil(objectKeys.length / config.limitLine);
+        if (pages > 0) {
+          let count = 0;
+          // chia queue để đẩy lên dịch theo limit
+          for (let i = 0; i < pages; i++) {
+            let queueObject = Object.fromEntries(
+              Object.entries(flattenObject).slice(
+                i * config.limitLine,
+                i * config.limitLine + config.limitLine
+              )
             );
+            let result = await translateByOpenAI(queueObject, count);
+            count++;
+            // lưu vào file kết quả
+            if (result) {
+              await fs.appendFile(
+                config.outputPath,
+                result + config.splitResultChar,
+                (err) => {
+                  if (err) throw err;
+                }
+              );
+            }
           }
         }
       }
     }
-    // convert từ nhiều result json thành 1 file object js
-    await mergeJson();
-
-    // kết thúc đo hiệu năng
-    let endTime = performance.now();
-    await fs.writeFile(
-      config.outputLogPath,
-      config.logTime.replace(
-        config.keyReplace,
-        Math.ceil((endTime - startTime) / 1000 / 60)
-      ),
-      (err) => {
-        if (err) throw err;
-      }
-    );
   }
+  // convert từ nhiều result json thành 1 file object js
+  await mergeJson();
+
+  // kết thúc đo hiệu năng
+  let endTime = performance.now();
+  await fs.writeFile(
+    config.outputLogPath,
+    config.logTime.replace(
+      config.keyReplace,
+      Math.ceil((endTime - startTime) / 1000 / 60)
+    ),
+    (err) => {
+      if (err) throw err;
+    }
+  );
 }
 
 /**

@@ -4,7 +4,8 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "serve": "node script.js"
+    "serve": "node script.js",
+    "merge": "node script.js -f"
   },
   "author": "Tô Nguyễn Đức Mạnh",
   "license": "ISC",
