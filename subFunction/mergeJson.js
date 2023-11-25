@@ -70,11 +70,23 @@ function rollBackLevelObject(originalObject) {
           continue;
         }
 
-        // nếu chưa ký tự ngăn cách tức là object
+        // nếu chứa ký tự ngăn cách tức là object
         if (key.includes(config.seperateLevelChar)) {
-          if (result.hasOwnProperty[key]) {
-          } else {
-            result[key] = {};
+          let parentKey = key.split(config.seperateLevelChar)[0];
+          if (parentKey && !result.hasOwnProperty(parentKey)) {
+            // tìm tất cả các key có chứa từ khóa này
+            let subObject = Object.fromEntries(
+              Object.entries(originalObject)
+                .filter((x) => x[0].includes(parentKey))
+                .map((x) => [
+                  x[0].replace(parentKey + config.seperateLevelChar, ""),
+                  x[1],
+                ])
+            );
+            if (subObject) {
+              // luôn gọi đệ quy để check xem trong object còn object nào khác không
+              result[parentKey] = rollBackLevelObject(subObject);
+            }
           }
         } else {
           // không chưa ký tự ngăn cách thì gán thẳng value

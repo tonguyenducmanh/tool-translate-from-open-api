@@ -9,7 +9,7 @@ sau đó đổi chỗ cho nhau.
 ![Ảnh config](images/read-config.png)
 
 ```
-Thực hiện cài nodeJS sau đõ chạy bằng terminal lệnh
+Thực hiện cài nodeJS sau đó chạy bằng terminal lệnh
 # npm install
 ```
 
@@ -25,4 +25,6 @@ Hình dưới là object khi dùng tool sẽ được trải phẳng từ nhiề
 Sau này người dùng có thể xác định được cấp nào với cấp nào, tránh nhầm key các object con.
 ![Ảnh object được trải phẳng về 1 cấp](<images/multiple-level-object to single-level-object.png>)
 Hình dưới là object khi đã dịch value, object ở dạng trải phẳng
-![Ảnh file đầu ra](images/translated-one-level-object.png)
+![Ảnh file đầu ra dạng thô](images/translated-one-level-object.png)
+Hình dưới là kết quả final khi object đã được trả về hình dạng nhiều cấp ban đầu và dịch thành công
+![Alt file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)

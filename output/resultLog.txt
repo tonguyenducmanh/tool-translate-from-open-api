@@ -1,1 +1,1 @@
-thời gian chạy tổng cộng là: 0.3864666666666666 phút
+thời gian chạy tổng cộng là: 0.9010333333333332 phút
