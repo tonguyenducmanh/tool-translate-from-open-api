@@ -51,8 +51,6 @@ export default async function () {
         }
       );
     }
-  } else {
-    if (err) throw err;
   }
 }
 
