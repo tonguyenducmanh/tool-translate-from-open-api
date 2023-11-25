@@ -4,10 +4,9 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "serve": "node script.js",
-    "mergeJson":"node mergeJson.js"
+    "serve": "node script.js"
   },
-  "author": "",
+  "author": "Tô Nguyễn Đức Mạnh",
   "license": "ISC",
   "type": "module",
   "dependencies": {
