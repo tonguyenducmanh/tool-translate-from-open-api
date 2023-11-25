@@ -21,6 +21,8 @@ chạy terminal lệnh dưới và đợi kết quả ở file "reuslt.js"
 
 Hình dưới là object khi chưa dịch value, đây là 1 object có nhiều cấp
 ![Ảnh file đầu vào](images/input-test.png)
-
+Hình dưới là object khi dùng tool sẽ được trải phẳng từ nhiều cấp về 1 cấp.
+Sau này người dùng có thể xác định được cấp nào với cấp nào, tránh nhầm key các object con.
+![Ảnh object được trải phẳng về 1 cấp](<images/multiple-level-object to single-level-object.png>)
 Hình dưới là object khi đã dịch value, object ở dạng trải phẳng
 ![Ảnh file đầu ra](images/translated-one-level-object.png)
