@@ -19,6 +19,16 @@ chạy terminal lệnh dưới và đợi kết quả ở file "reuslt.js"
 # npm run serve
 ```
 
+```
+Lưu ý: sẽ có những lúc chat GPT trả lời ra những câu thừa, thừa các ký tự đặc biệt
+nên khi cố gắng parse từ text object 1 level về file javascript object nhiều level bị lỗi,
+trường hợp lỗi có thể vào trong file result.txt ( kết quả gồm nhiều file json nhỏ gộp lại sau mỗi lần chatGPT response)
+copy vào 1 file js bất kỳ để check các chỗ cú pháp lỗi là sẽ
+được file object hoàn chỉnh
+# sau khi sửa chạy lệnh dưới để build lại về object nhiều tầng
+# npm run merge
+```
+
 Hình dưới là object khi chưa dịch value, đây là 1 object có nhiều cấp
 ![Ảnh file đầu vào](images/input-test.png)
 Hình dưới là object khi dùng tool sẽ được trải phẳng từ nhiều cấp về 1 cấp.
