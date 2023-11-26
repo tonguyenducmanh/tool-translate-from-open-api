@@ -1,2 +1,3 @@
-2023-11-26T13:32:56.322Z: translateByOpenAI(): Incorrect API key provided: replace me. You can find your API key at https://platform.openai.com/account/api-keys. 
-2023-11-26T13:32:56.324Z: Thời gian chạy tổng cộng là: 1 phút 
+20:37:58 26/11/2023: translateByOpenAI(): Incorrect API key provided: replace me. You can find your API key at https://platform.openai.com/account/api-keys. 
+20:37:58 26/11/2023: Thời gian chạy tổng cộng là: 0 phút 
+20:40:05 26/11/2023: Thời gian chạy tổng cộng là: 0 phút 

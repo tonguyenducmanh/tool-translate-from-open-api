@@ -9,7 +9,8 @@ import config from "../config.js";
  */
 export default async function (message) {
   if (message) {
-    let messageLog = `${new Date().toJSON()}: ${message} ${os.EOL}`;
+    let currentTime = new Date().toLocaleString("vn-VN");
+    let messageLog = `${currentTime}: ${message} ${os.EOL}`;
     await fs.appendFile(config.outputLogPath, messageLog, (err) => {
       if (err) throw err;
     });
