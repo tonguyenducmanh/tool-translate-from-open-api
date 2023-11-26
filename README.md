@@ -14,6 +14,12 @@ Thực hiện cài nodeJS sau đó chạy bằng terminal lệnh
 ```
 
 ```
+Để chạy demo việc dịch file js object nhiều level,
+chạy termial bằng lệnh (đọc từ file testObjectMultiLevel.js)
+# npm run test
+```
+
+```
 Copy text muốn dịch vào trong file "originalLangObject.js"
 chạy terminal lệnh dưới và đợi kết quả ở file "reuslt.js"
 # npm run serve

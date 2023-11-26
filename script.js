@@ -9,15 +9,21 @@ import translateByOpenAI from "./subFunction/translateByOpenAI.js";
 import logFile from "./subFunction/logFile.js";
 
 // chỉ bật 1 trong các dòng này
-// import originalLangObject from "./input/originalLangObject.js";
-// import originalLangObject from "./input/testObject.js";
-import originalLangObject from "./input/testObjectMultiLevel.js";
+import originalLangObject from "./input/originalLangObject.js";
+// import testObject from "./input/testObject.js";
+import testObject from "./input/testObjectMultiLevel.js";
 
 // thêm cờ nhận biết có gọi vào chat gpt không
 let callChatGpt = true;
-if (process.argv[2] && process.argv[2] === "-f") {
+let runTest = false;
+if (process && process.argv[2] && process.argv[2] === "-f") {
   callChatGpt = false;
 }
+// thêm cờ nhận biết có chạy dữ liệu test không
+if (process && process.argv[2] && process.argv[2] === "-t") {
+  runTest = true;
+}
+
 /**
  * hàm chạy chính của chương trình
  */
@@ -26,17 +32,17 @@ async function runTool() {
     // bắt đầu đo hiệu năng
     let startTime = performance.now();
 
+    let targetObject = runTest ? testObject : originalLangObject;
+
     if (callChatGpt) {
-      if (config && originalLangObject) {
+      if (config && targetObject) {
         // xóa trắng file output thô đi để ghi nhiều lần
         await fs.writeFile(config.outputPath, "", (err) => {
           if (err) throw err;
         });
 
         // trải phẳng object nhiều cấp thành object 1 cấp, chỉ giữ lại key value cấp nhỏ nhất
-        let flattenObject = await prepareDataBeforeTranslate(
-          originalLangObject
-        );
+        let flattenObject = await prepareDataBeforeTranslate(targetObject);
         if (config.limitLine && flattenObject) {
           // tính toán số lần gọi openAI
           let objectKeys = Object.keys(flattenObject);
