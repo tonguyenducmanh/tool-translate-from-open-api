@@ -38,9 +38,7 @@ export default async function () {
         });
       }
     } catch (error) {
-      if (error && error.error && error.error.message) {
-        await logFile("mergeJson(): " + error.error.message);
-      }
+      await logFile(error, "mergeJson");
     }
 
     // đưa object trải phẳng về object nhiều level nếu có thể
@@ -100,9 +98,7 @@ async function rollBackLevelObject(originalObject) {
       }
     }
   } catch (error) {
-    if (error && error.error && error.error.message) {
-      await logFile("rollBackLevelObject(): " + error.error.message);
-    }
+    await logFile(error, "rollBackLevelObject");
   }
   return result;
 }

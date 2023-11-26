@@ -28,9 +28,7 @@ export default async function translateByOpenAI(originalLangObject, count) {
       }
     }
   } catch (error) {
-    if (error && error.error && error.error.message) {
-      await logFile("translateByOpenAI(): " + error.error.message);
-    }
+    await logFile(error, "translateByOpenAI");
   }
   return result;
 }

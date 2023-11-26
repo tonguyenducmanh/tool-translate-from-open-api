@@ -79,9 +79,7 @@ async function runTool() {
     );
     await logFile(messageLog);
   } catch (error) {
-    if (error && error.error && error.error.message) {
-      await logFile("runTool(): " + error.error.message);
-    }
+    await logFile(error, "runTool");
   }
 }
 
@@ -115,9 +113,7 @@ async function prepareDataBeforeTranslate(originalObject) {
       }
     }
   } catch (error) {
-    if (error && error.error && error.error.message) {
-      await prepareDataBeforeTranslate("runTool(): " + error.error.message);
-    }
+    await logFile(error, "prepareDataBeforeTranslate");
   }
   return result;
 }
