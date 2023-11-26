@@ -14,6 +14,9 @@ export default {
   logTime: "Thời gian chạy tổng cộng là: {0} phút",
   keyReplace: "{0}",
   seperateLevelChar: ".", // khi làm phẳng object thì dùng ký tự này để ngăn cách các level object,
-  callChatGPT: "-f", // có gọi vào chat gpt không hay chỉ convert từ kết quả thô về kết quả object
+  notCallChatGPT: "-f", // có gọi vào chat gpt không hay chỉ convert từ kết quả thô về kết quả object
   runTest: "-t", // có chạy dữ liệu test không
+  logLocation: "vn-VN", // định dạng ngày tháng khi ghi log
+  openCurlyBracket: "{", // dấu mở ngoặc định dạng JSON
+  closeCurlyBracket: "}", // dấu đóng ngoặc định dạng JSOn
 };

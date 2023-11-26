@@ -15,8 +15,8 @@ export default async function () {
     try {
       let arr = [];
       while (data && data.length > 0 && data.length != "") {
-        let startIndex = data.indexOf("{");
-        let nextIndex = data.indexOf("}") + 1;
+        let startIndex = data.indexOf(config.openCurlyBracket);
+        let nextIndex = data.indexOf(config.closeCurlyBracket) + 1;
         let temp = data.substring(startIndex, nextIndex);
         if (temp && temp != "") {
           arr.push(temp);
@@ -24,8 +24,8 @@ export default async function () {
         data = data.substring(nextIndex);
         if (
           startIndex == nextIndex - 1 ||
-          !data.includes("{") ||
-          !data.includes("}")
+          !data.includes(config.openCurlyBracket) ||
+          !data.includes(config.closeCurlyBracket)
         ) {
           break;
         }

@@ -11,7 +11,7 @@ import config from "../config.js";
 export default async function (message, methodName) {
   try {
     if (message) {
-      let currentTime = new Date().toLocaleString("vn-VN");
+      let currentTime = new Date().toLocaleString(config.logLocation);
       // nếu là lưu log lỗi thì chỉ cần lưu message thôi
       if (message && message.error && message.error.message) {
         message = message.error.message;
