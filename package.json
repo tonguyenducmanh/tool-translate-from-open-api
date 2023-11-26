@@ -4,8 +4,8 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "serve": "node script.js",
-    "merge": "node script.js -f",
+    "serve": "node script.js -f",
+    "merge": "node script.js",
     "test": "node script.js -t"
   },
   "author": "Tô Nguyễn Đức Mạnh",

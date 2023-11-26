@@ -1,12 +1,12 @@
 // import thư viện
 import fs from "fs/promises";
-import os from "os";
 
 // import file
 import config from "./config.js";
 import mergeJson from "./subFunction/mergeJson.js";
 import translateByOpenAI from "./subFunction/translateByOpenAI.js";
 import logFile from "./subFunction/logFile.js";
+import checkFlag from "./subFunction/checkFlag.js";
 
 // chỉ bật 1 trong các dòng này
 import originalLangObject from "./input/originalLangObject.js";
@@ -14,15 +14,8 @@ import originalLangObject from "./input/originalLangObject.js";
 import testObject from "./input/testObjectMultiLevel.js";
 
 // thêm cờ nhận biết có gọi vào chat gpt không
-let callChatGpt = true;
-let runTest = false;
-if (process && process.argv[2] && process.argv[2] === "-f") {
-  callChatGpt = false;
-}
-// thêm cờ nhận biết có chạy dữ liệu test không
-if (process && process.argv[2] && process.argv[2] === "-t") {
-  runTest = true;
-}
+let callChatGPT = checkFlag(config.callChatGPT);
+let runTest = checkFlag(config.runTest);
 
 /**
  * hàm chạy chính của chương trình
@@ -34,7 +27,7 @@ async function runTool() {
 
     let targetObject = runTest ? testObject : originalLangObject;
 
-    if (callChatGpt) {
+    if (callChatGPT) {
       if (config && targetObject) {
         // xóa trắng file output thô đi để ghi nhiều lần
         await fs.writeFile(config.outputPath, "", (err) => {
