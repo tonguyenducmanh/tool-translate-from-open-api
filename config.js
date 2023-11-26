@@ -11,7 +11,7 @@ export default {
   splitResultChar: ";;;;",
   formatText: "utf-8",
   exportDefault: "export default ", // từ khóa thêm vào đầu json để biến thành mẫu export default object javascript
-  logTime: "thời gian chạy tổng cộng là: {0} phút",
+  logTime: "Thời gian chạy tổng cộng là: {0} phút",
   keyReplace: "{0}",
   seperateLevelChar: ".", // khi làm phẳng object thì dùng ký tự này để ngăn cách các level object
 };

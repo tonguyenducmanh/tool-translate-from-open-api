@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import util from "util";
 // import file
 import config from "../config.js";
+import logFile from "./logFile.js";
 
 export default async function () {
   // convert file text nhiều kết quả về 1 json duy nhất
@@ -21,7 +22,11 @@ export default async function () {
           arr.push(temp);
         }
         data = data.substring(nextIndex);
-        if (startIndex == nextIndex - 1) {
+        if (
+          startIndex == nextIndex - 1 ||
+          !data.includes("{") ||
+          !data.includes("}")
+        ) {
           break;
         }
       }
@@ -33,12 +38,14 @@ export default async function () {
         });
       }
     } catch (error) {
-      console.log(error);
+      if (error && error.error && error.error.message) {
+        await logFile("mergeJson(): " + error.error.message);
+      }
     }
 
     // đưa object trải phẳng về object nhiều level nếu có thể
     if (result) {
-      result = rollBackLevelObject(result);
+      result = await rollBackLevelObject(result);
     }
 
     // save vào file javascript
@@ -59,7 +66,7 @@ export default async function () {
  * @param {*} originalObject object đã được trải phẳng
  * @returns object nhiều level giống cấu trúc ban đầu
  */
-function rollBackLevelObject(originalObject) {
+async function rollBackLevelObject(originalObject) {
   let result = {};
   try {
     if (originalObject) {
@@ -83,7 +90,7 @@ function rollBackLevelObject(originalObject) {
             );
             if (subObject) {
               // luôn gọi đệ quy để check xem trong object còn object nào khác không
-              result[parentKey] = rollBackLevelObject(subObject);
+              result[parentKey] = await rollBackLevelObject(subObject);
             }
           }
         } else {
@@ -93,7 +100,9 @@ function rollBackLevelObject(originalObject) {
       }
     }
   } catch (error) {
-    console.log(error);
+    if (error && error.error && error.error.message) {
+      await logFile("rollBackLevelObject(): " + error.error.message);
+    }
   }
   return result;
 }

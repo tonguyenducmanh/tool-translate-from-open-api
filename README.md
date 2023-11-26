@@ -37,3 +37,5 @@ Hình dưới là object khi đã dịch value, object ở dạng trải phẳng
 ![Ảnh file đầu ra dạng thô](images/translated-one-level-object.png)
 Hình dưới là kết quả final khi object đã được trả về hình dạng nhiều cấp ban đầu và dịch thành công
 ![Alt file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)
+Trường hợp chạy có thể văng exception, tra log tại file resultLog.txt
+![Alt text](images/log-file.png)

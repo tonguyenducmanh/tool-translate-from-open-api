@@ -2,6 +2,7 @@
 import OpenAI from "openai";
 // import file
 import config from "../config.js";
+import logFile from "./logFile.js";
 /**
  * hàm gọi vào openAI ChatGPT để dịch json value sang ngôn ngữ mong muốn
  */
@@ -27,7 +28,9 @@ export default async function translateByOpenAI(originalLangObject, count) {
       }
     }
   } catch (error) {
-    console.log(error);
+    if (error && error.error && error.error.message) {
+      await logFile("translateByOpenAI(): " + error.error.message);
+    }
   }
   return result;
 }

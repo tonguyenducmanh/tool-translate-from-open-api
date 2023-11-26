@@ -1,10 +1,12 @@
 // import thư viện
 import fs from "fs/promises";
+import os from "os";
 
 // import file
 import config from "./config.js";
 import mergeJson from "./subFunction/mergeJson.js";
 import translateByOpenAI from "./subFunction/translateByOpenAI.js";
+import logFile from "./subFunction/logFile.js";
 
 // chỉ bật 1 trong các dòng này
 // import originalLangObject from "./input/originalLangObject.js";
@@ -68,16 +70,11 @@ async function runTool() {
 
   // kết thúc đo hiệu năng
   let endTime = performance.now();
-  await fs.writeFile(
-    config.outputLogPath,
-    config.logTime.replace(
-      config.keyReplace,
-      Math.ceil((endTime - startTime) / 1000 / 60)
-    ),
-    (err) => {
-      if (err) throw err;
-    }
+  let messageLog = config.logTime.replace(
+    config.keyReplace,
+    Math.floor((endTime - startTime) / 1000 / 60)
   );
+  await logFile(messageLog);
 }
 
 /**
