@@ -14,7 +14,7 @@ import originalLangObject from "./input/originalLangObject.js";
 import testObject from "./input/testObjectMultiLevel.js";
 
 // thêm cờ nhận biết có gọi vào chat gpt không
-let callChatGPT = checkFlag(config.callChatGPT);
+let notCallChatGPT = checkFlag(config.notCallChatGPT);
 let runTest = checkFlag(config.runTest);
 
 /**
@@ -27,7 +27,7 @@ async function runTool() {
 
     let targetObject = runTest ? testObject : originalLangObject;
 
-    if (callChatGPT) {
+    if (!notCallChatGPT) {
       if (config && targetObject) {
         // xóa trắng file output thô đi để ghi nhiều lần
         await fs.writeFile(config.outputPath, "", (err) => {
