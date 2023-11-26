@@ -8,11 +8,15 @@ import config from "../config.js";
  * @param message: thông tin cầnlog
  */
 export default async function (message) {
-  if (message) {
-    let currentTime = new Date().toLocaleString("vn-VN");
-    let messageLog = `${currentTime}: ${message} ${os.EOL}`;
-    await fs.appendFile(config.outputLogPath, messageLog, (err) => {
-      if (err) throw err;
-    });
+  try {
+    if (message) {
+      let currentTime = new Date().toLocaleString("vn-VN");
+      let messageLog = `${currentTime}: ${message} ${os.EOL}`;
+      await fs.appendFile(config.outputLogPath, messageLog, (err) => {
+        if (err) throw err;
+      });
+    }
+  } catch (error) {
+    console.log("logFile() error: " + error);
   }
 }
