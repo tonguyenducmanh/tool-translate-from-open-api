@@ -50,7 +50,8 @@ export default async function () {
     if (result) {
       await fs.writeFile(
         config.outputJSPath,
-        config.exportDefault + util.inspect(result),
+        config.exportDefault +
+          util.inspect(result, { depth: Infinity, compact: false }),
         (err) => {
           if (err) throw err;
         }
