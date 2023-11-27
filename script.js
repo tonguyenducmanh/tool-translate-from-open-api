@@ -42,6 +42,7 @@ async function runTool() {
           let pages = Math.ceil(objectKeys.length / config.limitLine);
           if (pages > 0) {
             let count = 0;
+            let countSuccess = 0;
             // chia queue để đẩy lên dịch theo limit
             for (let i = 0; i < pages; i++) {
               let queueObject = Object.fromEntries(
@@ -54,6 +55,7 @@ async function runTool() {
               count++;
               // lưu vào file kết quả
               if (result) {
+                countSuccess++;
                 await fs.appendFile(
                   config.outputPath,
                   result + config.splitResultChar,
@@ -61,6 +63,12 @@ async function runTool() {
                     if (err) throw err;
                   }
                 );
+                // Thêm log đã chạy thành công bao nhiêu %
+                let logSuccessMes = config.logTranslateSuccess.replace(
+                  config.keyReplace,
+                  ((count / pages) * 100).toFixed(2)
+                );
+                await logFile(logSuccessMes);
               }
             }
           }

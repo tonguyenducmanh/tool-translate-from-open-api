@@ -1,3 +1,13 @@
 20:37:58 26/11/2023: translateByOpenAI(): Incorrect API key provided: replace me. You can find your API key at https://platform.openai.com/account/api-keys. 
 20:37:58 26/11/2023: Thời gian chạy tổng cộng là: 0 phút 
 20:40:05 26/11/2023: Thời gian chạy tổng cộng là: 0 phút 
+17:05:39 27/11/2023: Đã dịch được: 11.11% 
+17:05:58 27/11/2023: Đã dịch được: 22.22% 
+17:06:17 27/11/2023: Đã dịch được: 33.33% 
+17:06:41 27/11/2023: Đã dịch được: 44.44% 
+17:07:04 27/11/2023: Đã dịch được: 55.56% 
+17:07:19 27/11/2023: Đã dịch được: 66.67% 
+17:07:33 27/11/2023: Đã dịch được: 77.78% 
+17:07:50 27/11/2023: Đã dịch được: 88.89% 
+17:08:00 27/11/2023: Đã dịch được: 100.00% 
+17:08:00 27/11/2023: Thời gian chạy tổng cộng là: 2 phút 
