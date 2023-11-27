@@ -9,7 +9,7 @@ import logFile from "./subFunction/logFile.js";
 import checkFlag from "./subFunction/checkFlag.js";
 
 import originalLangObject from "./input/originalLangObject.js";
-import testObject from "./input/testObjectMultiLevel.js";
+import testObject from "./input/test.js";
 
 // thêm cờ nhận biết có gọi vào chat gpt không
 let notCallChatGPT = checkFlag(config.notCallChatGPT);

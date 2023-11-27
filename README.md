@@ -15,7 +15,7 @@ Thực hiện cài nodeJS sau đó chạy bằng terminal lệnh
 
 ```
 Để chạy demo việc dịch file js object nhiều level,
-đọc từ file: testObjectMultiLevel.js, chạy termial bằng lệnh
+đọc từ file: test.js, chạy termial bằng lệnh
 # npm run test
 ```
 
