@@ -45,3 +45,5 @@ Hình dưới là kết quả final khi object đã được trả về hình d�
 ![Alt file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)
 Trường hợp chạy có thể văng exception, tra log tại file resultLog.txt
 ![Alt text](images/log-file.png)
+File này sẽ chứa cả thông tin % file js được dịch
+![Alt text](images/log-success-percent-file.png)
