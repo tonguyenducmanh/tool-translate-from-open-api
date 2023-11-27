@@ -12,6 +12,8 @@ export default {
   formatText: "utf-8",
   exportDefault: "export default ", // từ khóa thêm vào đầu json để biến thành mẫu export default object javascript
   logTime: "Thời gian chạy tổng cộng là: {0} phút",
+  logTranslateSuccess: "Đã dịch được: {0}%",
+  isLogInfo: true,
   keyReplace: "{0}",
   seperateLevelChar: ".", // khi làm phẳng object thì dùng ký tự này để ngăn cách các level object,
   notCallChatGPT: "-f", // có gọi vào chat gpt không hay chỉ convert từ kết quả thô về kết quả object
