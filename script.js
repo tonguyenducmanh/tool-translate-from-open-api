@@ -8,9 +8,7 @@ import translateByOpenAI from "./subFunction/translateByOpenAI.js";
 import logFile from "./subFunction/logFile.js";
 import checkFlag from "./subFunction/checkFlag.js";
 
-// chỉ bật 1 trong các dòng này
 import originalLangObject from "./input/originalLangObject.js";
-// import testObject from "./input/testObject.js";
 import testObject from "./input/testObjectMultiLevel.js";
 
 // thêm cờ nhận biết có gọi vào chat gpt không
