@@ -1,8 +1,9 @@
-// import library
+// import thư viện
 import OpenAI from "openai";
+
 // import file
 import config from "../config.js";
-import logFile from "./logFile.js";
+import { logFile } from "./logFile.js";
 /**
  * hàm gọi vào openAI ChatGPT để dịch json value sang ngôn ngữ mong muốn
  */

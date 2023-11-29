@@ -47,10 +47,10 @@ Trường hợp chạy có thể văng exception, tra log tại file resultLog.t
 ![log file](images/log-file.png)
 File này sẽ chứa cả thông tin % file js được dịch
 ![loading success](images/log-success-percent-file.png)
-File này sẽ chứa toàn bộ những ký tự đặc biệt cần replace trước khi thực hiện convert từ nhiều đoạn json trong file txt thành file javascript 1 object json duy nhất, sau khi convert xong sẽ trả lại về ký tự đặc biệt ban đầu
-![special-key config](images/special-key-config.png)
-Ví dụ chúng ta có từ khóa <{0}> được nhúng vào value của object, sẽ được replace theo file specialKey.js thành <<0>>
-![replace-special-key](images/object-replaced-special-key.png)
-Sau khi xử lý xong sẽ rollback ký tự đặc biệt ban đầu <<0>> thành <{0}>
-![roll-back-special-key](images/object-rollback-special-key.png)
-Tùy nhu cầu sử dụng người dùng tự thêm các cặp key value cần replace vào trong file specialKey.js.
+Bổ sung config những ký tự sẽ được loại bỏ trước khi dịch, những ký tự này sẽ được chuyển đổi thành UUID, sau khi dịch sẽ rollback từ UUID về ký tự đặc biệt
+![rexgex](images/regex.png)
+ví dụ, bạn muốn loại bỏ những ký tự đặc biệt giữa 2 dấu "" thì dùng regex
+
+```
+ /\"(.*?)\"/gi
+```

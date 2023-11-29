@@ -1,5 +1,5 @@
 export default {
-  paid_type: "Payment status",
+  paid_type: 'Payment status "1234" "xyz" "mmmm" {1111}',
   outward_exported_status: "Inventory-out status",
   to_date: {
     invoice_type: "Type",

@@ -5,9 +5,9 @@ import fs from "fs/promises";
 import config from "./config.js";
 import mergeJson from "./src/mergeJson.js";
 import translateByOpenAI from "./src/translateByOpenAI.js";
-import logFile from "./src/logFile.js";
+import { logFile } from "./src/logFile.js";
 import checkFlag from "./src/checkFlag.js";
-
+import { replaceSpecialKey } from "./src/handleSpecialKey.js";
 import originalLangObject from "./input/originalLangObject.js";
 import testObject from "./input/test.js";
 
@@ -34,6 +34,12 @@ async function runTool() {
 
         // trải phẳng object nhiều cấp thành object 1 cấp, chỉ giữ lại key value cấp nhỏ nhất
         let flattenObject = await prepareDataBeforeTranslate(targetObject);
+
+        // bổ sung remove tất cả ký tự đặc biệt
+        if (flattenObject && typeof flattenObject == "object") {
+          flattenObject = await replaceSpecialKey(flattenObject);
+        }
+
         if (config.limitLine && flattenObject) {
           // tính toán số lần gọi openAI
           let objectKeys = Object.keys(flattenObject);

@@ -1,14 +1,16 @@
 // import thư viện
 import fs from "fs/promises";
 import os from "os";
+
 // import file
 import config from "../config.js";
+import util from "util";
 /**
  * hàm có tác dụng log lại thông tin vào file resultLog.txt
  * @param message: thông tin cầnlog
  * @param methodName: tên method lưu log
  */
-export default async function (message, methodName) {
+export async function logFile(message, methodName) {
   try {
     if (message && config.isLogInfo) {
       let currentTime = new Date().toLocaleString(config.logLocation);
@@ -27,4 +29,15 @@ export default async function (message, methodName) {
   } catch (error) {
     console.log("logFile() error: " + error);
   }
+}
+
+export async function logFileJS(result, output) {
+  await fs.writeFile(
+    output,
+    config.exportDefault +
+      util.inspect(result, { depth: Infinity, compact: false }),
+    (err) => {
+      if (err) throw err;
+    }
+  );
 }

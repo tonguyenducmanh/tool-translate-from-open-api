@@ -1,10 +1,10 @@
+// import thư viện
 import fs from "fs/promises";
-import util from "util";
+
 // import file
 import config from "../config.js";
-import logFile from "./logFile.js";
-
-import specialKey from "./specialKey.js";
+import { logFile, logFileJS } from "./logFile.js";
+import { rollBackSpecialKey } from "./handleSpecialKey.js";
 
 export default async function () {
   // convert file text nhiều kết quả về 1 json duy nhất
@@ -13,8 +13,6 @@ export default async function () {
     if (err) throw err;
   });
   if (data) {
-    // remove các từ khóa đặc biệt trước khi mergejson
-    data = await replaceSpecialKey(data, specialKey);
     // lọc ra toàn bộ các đoạn bắt đầu bằng { và kết thúc bằng } đưa vào mảng
     try {
       let arr = [];
@@ -51,7 +49,10 @@ export default async function () {
 
     //roll back lại toàn bộ ký tự đặc biệt đã thay thế ban đầu
     if (result) {
-      result = await rollBackSpecialKey(result);
+      let specialKey = await import("../output/specialKey.js");
+      if (specialKey && specialKey.default) {
+        result = await rollBackSpecialKey(result, specialKey.default);
+      }
     }
 
     // đưa object trải phẳng về object nhiều level nếu có thể
@@ -61,80 +62,10 @@ export default async function () {
 
     // save vào file javascript
     if (result) {
-      await fs.writeFile(
-        config.outputJSPath,
-        config.exportDefault +
-          util.inspect(result, { depth: Infinity, compact: false }),
-        (err) => {
-          if (err) throw err;
-        }
-      );
+      await logFileJS(result, config.outputJSPath);
     }
   }
 }
-
-/**
- * remove các từ khóa đặc biệt trước khi mergejson
- * @param {string} data chuỗi cần loại bỏ ký tự đặc biệt
- */
-async function replaceSpecialKey(data, objectReplace) {
-  try {
-    if (data && objectReplace && typeof objectReplace == "object") {
-      Object.keys(objectReplace).forEach((key) => {
-        if (objectReplace.hasOwnProperty(key) && objectReplace[key]) {
-          data = data.toString().replaceAll(key, objectReplace[key]);
-        }
-      });
-    }
-  } catch (error) {
-    await logFile(error, "replaceSpecialKey");
-  }
-  return data;
-}
-
-/**
- * roll back lại toàn bộ ký tự đặc biệt đã thay thế ban đầu
- * @param {string} data chuỗi cần loại bỏ ký tự đặc biệt
- */
-async function rollBackSpecialKey(data) {
-  try {
-    if (
-      data &&
-      typeof data == "object" &&
-      specialKey &&
-      typeof specialKey == "object"
-    ) {
-      let revertSpecialKey = await revertObject(specialKey);
-      await Object.keys(data).forEach(async (key) => {
-        if (data.hasOwnProperty(key) && data[key]) {
-          data[key] = await replaceSpecialKey(data[key], revertSpecialKey);
-        }
-      });
-    }
-  } catch (error) {
-    await logFile(error, "rollBackSpecialKey");
-  }
-  return data;
-}
-
-/**
- * hàm đảo ngược object dùng value làm key, dùng key làm value
- * @returns
- */
-async function revertObject(data) {
-  let result = data;
-  try {
-    if (data && typeof data == "object") {
-      result = Object.fromEntries(
-        Object.entries(data).map((x) => [x[1], x[0]])
-      );
-    }
-  } catch (error) {
-    await logFile(error, "revertObject");
-  }
-  return result;
-}
-
 /**
  * đưa object 1 level về thành object nhiều level
  * @param {*} originalObject object đã được trải phẳng
