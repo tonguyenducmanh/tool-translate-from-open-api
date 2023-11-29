@@ -15,8 +15,8 @@ export async function replaceSpecialKey(data) {
       let regexArray = config.specialKeyNeedReplace;
       if (regexArray && regexArray.length > 0) {
         Object.keys(data).forEach((key) => {
-          regexArray.forEach((regexKey) => {
-            extractStringByRegex(data, key, specialObject, regexKey);
+          regexArray.forEach(async (regexKey) => {
+            await extractStringByRegex(data, key, specialObject, regexKey);
           });
         });
       }
@@ -31,18 +31,22 @@ export async function replaceSpecialKey(data) {
   return data;
 }
 
-function extractStringByRegex(data, key, specialObject, regex) {
-  if (data.hasOwnProperty(key) && data[key]) {
-    let text = data[key];
-    let resultMatchGroup = text.match(regex);
-    if (resultMatchGroup && resultMatchGroup.length > 0) {
-      resultMatchGroup.forEach((item) => {
-        let newGuid = uuidv4();
-        specialObject[newGuid] = item;
-        text = text.replace(item, newGuid);
-      });
-      data[key] = text;
+async function extractStringByRegex(data, key, specialObject, regex) {
+  try {
+    if (data.hasOwnProperty(key) && data[key]) {
+      let text = data[key];
+      let resultMatchGroup = text.match(regex);
+      if (resultMatchGroup && resultMatchGroup.length > 0) {
+        resultMatchGroup.forEach((item) => {
+          let newGuid = uuidv4();
+          specialObject[newGuid] = item;
+          text = text.replace(item, newGuid);
+        });
+        data[key] = text;
+      }
     }
+  } catch (error) {
+    await logFile(error, "extractStringByRegex");
   }
 }
 

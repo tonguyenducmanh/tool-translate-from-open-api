@@ -32,12 +32,16 @@ export async function logFile(message, methodName) {
 }
 
 export async function logFileJS(result, output) {
-  await fs.writeFile(
-    output,
-    config.exportDefault +
-      util.inspect(result, { depth: Infinity, compact: false }),
-    (err) => {
-      if (err) throw err;
-    }
-  );
+  try {
+    await fs.writeFile(
+      output,
+      config.exportDefault +
+        util.inspect(result, { depth: Infinity, compact: false }),
+      (err) => {
+        if (err) throw err;
+      }
+    );
+  } catch (error) {
+    console.log("logFileJS() error: " + error);
+  }
 }
