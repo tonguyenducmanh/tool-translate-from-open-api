@@ -34,11 +34,18 @@ export async function replaceSpecialKey(data) {
 async function extractStringByRegex(data, key, specialObject, regex) {
   try {
     if (data.hasOwnProperty(key) && data[key]) {
+      let dataKeys = Object.keys(specialObject);
       let text = data[key];
       let resultMatchGroup = text.match(regex);
       if (resultMatchGroup && resultMatchGroup.length > 0) {
         resultMatchGroup.forEach((item) => {
           let newGuid = uuidv4();
+          // xử lý trường hợp có key trùng nhau: vd như muốn loại bỏ cả "" và {}
+          // trong chuỗi "{123}" thì sẽ phải khử key trùng và trả về đủ là "{123}" thay vì {123}
+          let sameKey = dataKeys.find((x) => text.toString().includes(x));
+          if (sameKey) {
+            item = item.replace(sameKey, specialObject[sameKey]);
+          }
           specialObject[newGuid] = item;
           text = text.replace(item, newGuid);
         });
