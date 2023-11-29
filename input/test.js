@@ -5,6 +5,8 @@ export default {
     invoice_type: "Type",
     send_publish_tax_status: "Status {0}",
     invoice_status: "Invoice status",
+    OriginPriceWarning:
+      'Total amount on source vouchers is not equal to fixed asset historical cost. Watch instruction <a href="{link}" target="_blank">here</a>. Do you want to record Increment?',
     is_created_inward: "Inventory-in status",
     is_change_invoice: "Paper invoice transferred <{0}>",
     receiver_name: "Invoice Recipient's Name",
