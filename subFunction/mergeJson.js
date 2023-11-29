@@ -4,6 +4,8 @@ import util from "util";
 import config from "../config.js";
 import logFile from "./logFile.js";
 
+import specialKey from "../specialKey/specialKey.js";
+
 export default async function () {
   // convert file text nhiều kết quả về 1 json duy nhất
   let result = {};
@@ -11,6 +13,8 @@ export default async function () {
     if (err) throw err;
   });
   if (data) {
+    // remove các từ khóa đặc biệt trước khi mergejson
+    data = await prepareDataBeforeMerge(data, specialKey);
     // lọc ra toàn bộ các đoạn bắt đầu bằng { và kết thúc bằng } đưa vào mảng
     try {
       let arr = [];
@@ -41,6 +45,11 @@ export default async function () {
       await logFile(error, "mergeJson");
     }
 
+    //roll back lại toàn bộ ký tự đặc biệt đã thay thế ban đầu
+    if (result) {
+      result = await rollBackSpecialKey(result);
+    }
+
     // đưa object trải phẳng về object nhiều level nếu có thể
     if (result) {
       result = await rollBackLevelObject(result);
@@ -58,6 +67,69 @@ export default async function () {
       );
     }
   }
+}
+
+/**
+ * remove các từ khóa đặc biệt trước khi mergejson
+ * @param {string} data chuỗi cần loại bỏ ký tự đặc biệt
+ */
+async function prepareDataBeforeMerge(data, objectReplace) {
+  try {
+    if (data && objectReplace && typeof objectReplace == "object") {
+      Object.keys(objectReplace).forEach((key) => {
+        if (objectReplace.hasOwnProperty(key) && objectReplace[key]) {
+          data = data.toString().replaceAll(key, objectReplace[key]);
+        }
+      });
+    }
+  } catch (error) {
+    await logFile(error, "prepareDataBeforeMerge");
+  }
+  return data;
+}
+
+/**
+ * roll back lại toàn bộ ký tự đặc biệt đã thay thế ban đầu
+ * @param {string} data chuỗi cần loại bỏ ký tự đặc biệt
+ */
+async function rollBackSpecialKey(data) {
+  try {
+    if (
+      data &&
+      typeof data == "object" &&
+      specialKey &&
+      typeof specialKey == "object"
+    ) {
+      let revertSpecialKey = await revertObject(specialKey);
+      await Object.keys(data).forEach(async (key) => {
+        if (data.hasOwnProperty(key) && data[key]) {
+          data[key] = await prepareDataBeforeMerge(data[key], revertSpecialKey);
+        }
+      });
+      debugger;
+    }
+  } catch (error) {
+    await logFile(error, "rollBackSpecialKey");
+  }
+  return data;
+}
+
+/**
+ * hàm đảo ngược object dùng value làm key, dùng key làm value
+ * @returns
+ */
+async function revertObject(data) {
+  let result = data;
+  try {
+    if (data && typeof data == "object") {
+      result = Object.fromEntries(
+        Object.entries(data).map((x) => [x[1], x[0]])
+      );
+    }
+  } catch (error) {
+    await logFile(error, "revertObject");
+  }
+  return result;
 }
 
 /**

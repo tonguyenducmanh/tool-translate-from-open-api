@@ -42,8 +42,10 @@ Sau này người dùng có thể xác định được cấp nào với cấp n
 Hình dưới là object khi đã dịch value, object ở dạng trải phẳng
 ![Ảnh file đầu ra dạng thô](images/translated-one-level-object.png)
 Hình dưới là kết quả final khi object đã được trả về hình dạng nhiều cấp ban đầu và dịch thành công
-![Alt file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)
+![Ảnh file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)
 Trường hợp chạy có thể văng exception, tra log tại file resultLog.txt
-![Alt text](images/log-file.png)
+![log file](images/log-file.png)
 File này sẽ chứa cả thông tin % file js được dịch
-![Alt text](images/log-success-percent-file.png)
+![loading success](images/log-success-percent-file.png)
+File này sẽ chứa toàn bộ những ký tự đặc biệt cần replace trước khi thực hiện convert từ nhiều đoạn json trong file txt thành file javascript 1 object json duy nhất, sau khi convert xong sẽ trả lại về ký tự đặc biệt ban đầu
+![special-key config](images/special-key-config.png)
