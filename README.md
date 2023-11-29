@@ -8,6 +8,14 @@ sau đó đổi chỗ cho nhau.
 
 ![Ảnh config](images/read-config.png)
 
+Những ký tự đặc biệt được cấu hình trong config.js tại Key "specialKeyNeedReplace" sẽ được loại bỏ trước khi dịch, những ký tự này sẽ được chuyển đổi thành UUID, sau khi dịch sẽ rollback từ UUID về ký tự đặc biệt
+![rexgex](images/regex.png)
+ví dụ, bạn muốn loại bỏ những ký tự đặc biệt giữa 2 dấu "" thì dùng regex
+
+```
+ /\"(.*?)\"/gi
+```
+
 ```
 Thực hiện cài nodeJS sau đó chạy bằng terminal lệnh
 # npm install
@@ -47,10 +55,3 @@ Trường hợp chạy có thể văng exception, tra log tại file resultLog.t
 ![log file](images/log-file.png)
 File này sẽ chứa cả thông tin % file js được dịch
 ![loading success](images/log-success-percent-file.png)
-Bổ sung config những ký tự sẽ được loại bỏ trước khi dịch, những ký tự này sẽ được chuyển đổi thành UUID, sau khi dịch sẽ rollback từ UUID về ký tự đặc biệt
-![rexgex](images/regex.png)
-ví dụ, bạn muốn loại bỏ những ký tự đặc biệt giữa 2 dấu "" thì dùng regex
-
-```
- /\"(.*?)\"/gi
-```
