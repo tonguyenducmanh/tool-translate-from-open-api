@@ -3,10 +3,10 @@ export default {
   outward_exported_status: "Inventory-out status",
   to_date: {
     invoice_type: "Type",
-    send_publish_tax_status: "Status",
+    send_publish_tax_status: "Status {0}",
     invoice_status: "Invoice status",
     is_created_inward: "Inventory-in status",
-    is_change_invoice: "Paper invoice transferred",
+    is_change_invoice: "Paper invoice transferred <{0}>",
     receiver_name: "Invoice Recipient's Name",
     receiver_email: "Invoice Recipient's Email",
     payment_date: "Due date",

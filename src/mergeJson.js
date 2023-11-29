@@ -35,9 +35,13 @@ export default async function () {
         }
       }
       if (arr) {
-        arr.forEach((item) => {
-          if (item && JSON.parse(item)) {
-            result = { ...result, ...JSON.parse(item) };
+        arr.forEach(async (item) => {
+          try {
+            if (item && JSON.parse(item)) {
+              result = { ...result, ...JSON.parse(item) };
+            }
+          } catch (error) {
+            await logFile(error + item, "mergeJson: JSON.parse()");
           }
         });
       }
