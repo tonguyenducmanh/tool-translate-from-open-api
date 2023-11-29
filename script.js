@@ -1,11 +1,8 @@
-// import thư viện
-import fs from "fs/promises";
-
 // import file
 import config from "./config.js";
 import mergeJson from "./src/mergeJson.js";
 import translateByOpenAI from "./src/translateByOpenAI.js";
-import { logFile } from "./src/logFile.js";
+import { logFile, logResultText } from "./src/logFile.js";
 import checkFlag from "./src/checkFlag.js";
 import { replaceSpecialKey } from "./src/handleSpecialKey.js";
 import originalLangObject from "./input/originalLangObject.js";
@@ -28,9 +25,8 @@ async function runTool() {
     if (!notCallChatGPT) {
       if (config && targetObject) {
         // xóa trắng file output thô đi để ghi nhiều lần
-        await fs.writeFile(config.outputPath, "", (err) => {
-          if (err) throw err;
-        });
+        await logResultText("");
+        await logFile(config.startLog);
 
         // trải phẳng object nhiều cấp thành object 1 cấp, chỉ giữ lại key value cấp nhỏ nhất
         let flattenObject = await prepareDataBeforeTranslate(targetObject);
@@ -60,13 +56,7 @@ async function runTool() {
               // lưu vào file kết quả
               if (result) {
                 countSuccess++;
-                await fs.appendFile(
-                  config.outputPath,
-                  result + config.splitResultChar,
-                  (err) => {
-                    if (err) throw err;
-                  }
-                );
+                await logResultText(result + config.splitResultChar);
                 // Thêm log đã chạy thành công bao nhiêu %
                 let logSuccessMes = config.logTranslateSuccess.replace(
                   config.keyReplace,

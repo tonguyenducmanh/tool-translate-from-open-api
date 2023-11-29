@@ -31,6 +31,11 @@ export async function logFile(message, methodName) {
   }
 }
 
+/**
+ * log thông tin vào file javascript
+ * @param {*} result
+ * @param {*} output
+ */
 export async function logFileJS(result, output) {
   try {
     await fs.writeFile(
@@ -43,5 +48,19 @@ export async function logFileJS(result, output) {
     );
   } catch (error) {
     console.log("logFileJS() error: " + error);
+  }
+}
+
+/**
+ * log kết quả vào file result.txt
+ * @param {*} result
+ */
+export async function logResultText(result) {
+  try {
+    await fs.writeFile(config.outputPath, result, (err) => {
+      if (err) throw err;
+    });
+  } catch (error) {
+    console.log("logResultText() error: " + error);
   }
 }
