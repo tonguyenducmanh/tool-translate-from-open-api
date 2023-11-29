@@ -106,7 +106,6 @@ async function rollBackSpecialKey(data) {
           data[key] = await prepareDataBeforeMerge(data[key], revertSpecialKey);
         }
       });
-      debugger;
     }
   } catch (error) {
     await logFile(error, "rollBackSpecialKey");
