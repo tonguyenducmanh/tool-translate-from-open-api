@@ -9,7 +9,7 @@ export default {
   specialKeyPath: "./output/specialKey.js", // file js lưu object các ký tự đặc biệt không dịch
   // danh sách ký tự cần replace, sử dụng biểu thức chính quy, replace các cặp {} và ""
   specialKeyNeedReplace: [/\{(.*?)\}/gi, /\"(.*?)\"/gi],
-  limitLine: 100, // số key giới hạn dịch 1 lần gọi tới chat GPT
+  limitLine: 70, // số key giới hạn dịch 1 lần gọi tới chat GPT
   modelGPT: "gpt-3.5-turbo", // model chat gpt sẽ sử dụng
   roleCallGPT: "user",
   splitResultChar: ";;;;",
