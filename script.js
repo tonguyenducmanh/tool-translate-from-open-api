@@ -3,10 +3,10 @@ import fs from "fs/promises";
 
 // import file
 import config from "./config.js";
-import mergeJson from "./subFunction/mergeJson.js";
-import translateByOpenAI from "./subFunction/translateByOpenAI.js";
-import logFile from "./subFunction/logFile.js";
-import checkFlag from "./subFunction/checkFlag.js";
+import mergeJson from "./src/mergeJson.js";
+import translateByOpenAI from "./src/translateByOpenAI.js";
+import logFile from "./src/logFile.js";
+import checkFlag from "./src/checkFlag.js";
 
 import originalLangObject from "./input/originalLangObject.js";
 import testObject from "./input/test.js";

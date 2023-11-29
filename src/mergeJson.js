@@ -4,7 +4,7 @@ import util from "util";
 import config from "../config.js";
 import logFile from "./logFile.js";
 
-import specialKey from "../specialKey/specialKey.js";
+import specialKey from "./specialKey.js";
 
 export default async function () {
   // convert file text nhiều kết quả về 1 json duy nhất
