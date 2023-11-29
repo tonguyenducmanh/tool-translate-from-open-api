@@ -33,7 +33,7 @@ export async function replaceSpecialKey(data) {
 
 async function extractStringByRegex(data, key, specialObject, regex) {
   try {
-    if (data.hasOwnProperty(key) && data[key]) {
+    if (data.hasOwnProperty(key) && data[key] && typeof data[key] == "string") {
       let dataKeys = Object.keys(specialObject);
       let text = data[key];
       let resultMatchGroup = text.match(regex);
