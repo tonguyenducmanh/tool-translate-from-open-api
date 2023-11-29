@@ -14,7 +14,7 @@ export default async function () {
   });
   if (data) {
     // remove các từ khóa đặc biệt trước khi mergejson
-    data = await prepareDataBeforeMerge(data, specialKey);
+    data = await replaceSpecialKey(data, specialKey);
     // lọc ra toàn bộ các đoạn bắt đầu bằng { và kết thúc bằng } đưa vào mảng
     try {
       let arr = [];
@@ -77,7 +77,7 @@ export default async function () {
  * remove các từ khóa đặc biệt trước khi mergejson
  * @param {string} data chuỗi cần loại bỏ ký tự đặc biệt
  */
-async function prepareDataBeforeMerge(data, objectReplace) {
+async function replaceSpecialKey(data, objectReplace) {
   try {
     if (data && objectReplace && typeof objectReplace == "object") {
       Object.keys(objectReplace).forEach((key) => {
@@ -87,7 +87,7 @@ async function prepareDataBeforeMerge(data, objectReplace) {
       });
     }
   } catch (error) {
-    await logFile(error, "prepareDataBeforeMerge");
+    await logFile(error, "replaceSpecialKey");
   }
   return data;
 }
@@ -107,7 +107,7 @@ async function rollBackSpecialKey(data) {
       let revertSpecialKey = await revertObject(specialKey);
       await Object.keys(data).forEach(async (key) => {
         if (data.hasOwnProperty(key) && data[key]) {
-          data[key] = await prepareDataBeforeMerge(data[key], revertSpecialKey);
+          data[key] = await replaceSpecialKey(data[key], revertSpecialKey);
         }
       });
     }
