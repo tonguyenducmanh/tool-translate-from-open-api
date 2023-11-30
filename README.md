@@ -2,11 +2,11 @@
 
 ### Mục lục
 
-[1. Yêu cầu](#requirement)
-[2. Hướng dẫn](#tutorial)
-[3. Tra log](#log)
-[4. Xóa ký tự đặc biệt trong value JSON](#remove-special)
-[5. Object nhiều level thành 1 object 1 level](#simplified-object)
+[1. Yêu cầu](#requirement)\
+[2. Hướng dẫn](#tutorial)\
+[3. Tra log](#log)\
+[4. Xóa ký tự đặc biệt trong value JSON](#remove-special)\
+[5. Object nhiều level thành 1 object 1 level](#simplified-object)\
 [6. Rút gọn key của object](#short-link)
 
 ### <a name="requirement"></a> 1. Yêu cầu
