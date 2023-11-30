@@ -8,7 +8,9 @@
 [4. Xóa ký tự đặc biệt trong value JSON](#remove-special)\
 [5. Object nhiều level thành 1 object 1 level](#simplified-object)\
 [6. Rút gọn key của object](#short-link)\
-[7. Sửa lỗi và merge lại file](#merge-file)
+[7. Sửa lỗi và merge lại file](#merge-file)\
+[8. Kiểm tra xem đã dịch được hết object chưa](#compare-file)
+
 
 ### <a name="requirement"></a> 1. Yêu cầu
 
@@ -111,3 +113,7 @@ Tra log trong resultLog.txt:
 
 - Trường hợp là lỗi ký tự đặc biệt không json parse được thì thêm ký tự đặc biệt đó vào config phần "specialKeyNeedReplace" để bỏ qua không dịch.
 - Trường hợp object trả về trong result.txt không hoàn chỉnh, dịch sót thì vào lại config.js cấu hình lại limitLine giảm xuống (để dịch ít dòng hơn nhưng đủ ký tự hơn).
+### <a name="#compare-file"></a> 8. Kiểm tra xem đã dịch được hết object chưa
+Đừng quá tin tưởng vào chatGPT, có thể nó dịch bị double key hoặc bị miss key.
+Sử dụng tool ở link bên dưới để double check lại xem đã dịch được bao nhiêu key của file rồi, key mà dịch xong vẫn có value giống key gốc cũng sẽ hiển thị. Sau khi đã chạy và xuất ra được object các key chưa dịch thì cho lại vào tool dịch này trong file originalLangObject.js và chạy "npm run serve" để dịch tiếp; rồi lại cho vào phần addmore của tool dưới ....
+> https://github.com/tonguyenducmanh/tool-mapping-json-key-value-from-file
