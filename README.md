@@ -7,7 +7,7 @@
 [3. Tra log](#log)\
 [4. Xóa ký tự đặc biệt trong value JSON](#remove-special)\
 [5. Object nhiều level thành 1 object 1 level](#simplified-object)\
-[6. Rút gọn key của object](#short-link)
+[6. Rút gọn key của object](#short-link)\
 [7. Sửa lỗi và merge lại file](#merge-file)
 
 ### <a name="requirement"></a> 1. Yêu cầu
@@ -61,6 +61,7 @@ File này sẽ chứa cả thông tin % file js được dịch
 ![loading success](images/log-success-percent-file.png)
 
 ### <a name="remove-special"></a> 4. Xóa ký tự đặc biệt trong value JSON
+
 Mục đích tránh những lỗi không mong muốn khi json parse, json stringify.
 Những ký tự đặc biệt được cấu hình trong config.js tại Key "specialKeyNeedReplace" sẽ được loại bỏ trước khi dịch, những ký tự này sẽ được chuyển đổi thành UUID, sau khi dịch sẽ rollback từ UUID về ký tự đặc biệt
 ![rexgex](images/regex.png)
@@ -71,6 +72,7 @@ ví dụ, bạn muốn loại bỏ những ký tự đặc biệt giữa 2 dấu
 ```
 
 ### <a name="simplified-object"></a> 5. Object nhiều level thành 1 object 1 level
+
 Mục đích trải phẳng object thành 1 cấp.
 Hình dưới là object khi chưa dịch value, đây là 1 object có nhiều cấp
 ![Ảnh file đầu vào](images/input-test.png)
@@ -82,7 +84,8 @@ Hình dưới là object khi đã dịch value, object ở dạng trải phẳng
 Hình dưới là kết quả final khi object đã được trả về hình dạng nhiều cấp ban đầu và dịch thành công
 ![Ảnh file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)
 
-### <a name="short-link"></a>  6. Rút gọn key của object
+### <a name="short-link"></a> 6. Rút gọn key của object
+
 Mục đích để số ký tự gửi đi được giảm thiểu.
 Hình dưới là json đã được làm đơn giản hóa key
 ![Ảnh key được rút gọn](images/simplified-key-before-translate.png)
@@ -91,7 +94,8 @@ Hình dưới là store lưu những key được làm đơn giản hóa
 Hình dưới là sau khi json đã được khôi phục key ban đầu
 ![Ảnh key đã được khôi phục](images/simplified-key-translated-restored.png)
 
-### <a name="merge-file"></a>  7. Sửa lỗi và merge lại file
+### <a name="merge-file"></a> 7. Sửa lỗi và merge lại file
+
 Mục đích tận dụng số file đã dịch và group lại.
 Sẽ có những lúc chat GPT trả lời ra những câu thừa, thừa các ký tự đặc biệt
 nên khi cố gắng parse từ text object 1 level về file javascript object nhiều level bị lỗi.
@@ -104,5 +108,6 @@ Cách xử lý:
 - Thực hiện chạy lệnh "npm run merge" để build lại thành file js hoàn chỉnh
 
 Tra log trong resultLog.txt:
+
 - Trường hợp là lỗi ký tự đặc biệt không json parse được thì thêm ký tự đặc biệt đó vào config phần "specialKeyNeedReplace" để bỏ qua không dịch.
 - Trường hợp object trả về trong result.txt không hoàn chỉnh, dịch sót thì vào lại config.js cấu hình lại limitLine giảm xuống (để dịch ít dòng hơn nhưng đủ ký tự hơn).
