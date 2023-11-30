@@ -2,7 +2,7 @@ export default {
   secretKey: ["replace me", "replace me too"], // mã bí mật lấy từ trang https://platform.openai.com/api-keys
   // cần có ít nhất 2 key để chạy vòng lặp thay phiên nhau tránh rate limit của open ai
   translateJson:
-    "return value of JSON in Korean Language, every UUID in value will not change", //câu lệnh sẽ chạy để build ra ngôn ngữ mới
+    "dịch value của json sang tiếng nhật", //câu lệnh sẽ chạy để build ra ngôn ngữ mới
   outputPath: "./output/result.txt", // đường dẫn kết quả
   outputLogPath: "./output/resultLog.txt", // đường dẫn kết quả
   outputJSPath: "./output/result.js", // file merge
@@ -30,6 +30,4 @@ export default {
   notCallChatGPT: "-f", // có gọi vào chat gpt không hay chỉ convert từ kết quả thô về kết quả object
   runTest: "-t", // có chạy dữ liệu test không
   logLocation: "vn-VN", // định dạng ngày tháng khi ghi log
-  openCurlyBracket: "{", // dấu mở ngoặc định dạng JSON
-  closeCurlyBracket: "}", // dấu đóng ngoặc định dạng JSOn
 };
