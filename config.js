@@ -15,16 +15,16 @@ export default {
     /\##(.*?)\##/gi,
     /\###(.*?)\###/gi,
   ],
+  regexJson: /\{(.*?)\}/gi, // biểu thức chính quy để lọc ra 1 object
   limitLine: 50, // số key giới hạn dịch 1 lần gọi tới chat GPT
   modelGPT: "gpt-3.5-turbo", // model chat gpt sẽ sử dụng
   roleCallGPT: "user",
-  splitResultChar: ";;;;",
   formatText: "utf-8",
   exportDefault: "export default ", // từ khóa thêm vào đầu json để biến thành mẫu export default object javascript
   logTime: "Thời gian chạy tổng cộng là: {0} phút",
   logTranslateSuccess: "Đã dịch được: {0}%",
   startLog: "Bắt đầu thực hiện dịch",
-  isLogInfo: true,
+  isLogInfo: true, // có muốn ghi log không phải lỗi không
   keyReplace: "{0}",
   seperateLevelChar: ".", // khi làm phẳng object thì dùng ký tự này để ngăn cách các level object,
   notCallChatGPT: "-f", // có gọi vào chat gpt không hay chỉ convert từ kết quả thô về kết quả object

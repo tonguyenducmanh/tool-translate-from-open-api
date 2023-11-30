@@ -8,14 +8,6 @@ sau đó đổi chỗ cho nhau.
 
 ![Ảnh config](images/read-config.png)
 
-Những ký tự đặc biệt được cấu hình trong config.js tại Key "specialKeyNeedReplace" sẽ được loại bỏ trước khi dịch, những ký tự này sẽ được chuyển đổi thành UUID, sau khi dịch sẽ rollback từ UUID về ký tự đặc biệt
-![rexgex](images/regex.png)
-ví dụ, bạn muốn loại bỏ những ký tự đặc biệt giữa 2 dấu "" thì dùng regex
-
-```
- /\"(.*?)\"/gi
-```
-
 ```
 Thực hiện cài nodeJS sau đó chạy bằng terminal lệnh
 # npm install
@@ -42,6 +34,25 @@ copy vào 1 file js bất kỳ để check các chỗ cú pháp lỗi là sẽ �
 # npm run merge
 ```
 
+## Người dùng có thể tra các log về quá trình chạy và các lỗi xảy ra như sau
+
+Trường hợp chạy có thể văng exception, tra log tại file resultLog.txt
+![log file](images/log-file.png)
+File này sẽ chứa cả thông tin % file js được dịch
+![loading success](images/log-success-percent-file.png)
+
+## Luồng xử lý remove ký tự đặc biệt trong value JSON
+
+Những ký tự đặc biệt được cấu hình trong config.js tại Key "specialKeyNeedReplace" sẽ được loại bỏ trước khi dịch, những ký tự này sẽ được chuyển đổi thành UUID, sau khi dịch sẽ rollback từ UUID về ký tự đặc biệt
+![rexgex](images/regex.png)
+ví dụ, bạn muốn loại bỏ những ký tự đặc biệt giữa 2 dấu "" thì dùng regex
+
+```
+ /\"(.*?)\"/gi
+```
+
+## Luồng biến đổi object nhiều level thành 1 object 1 level
+
 Hình dưới là object khi chưa dịch value, đây là 1 object có nhiều cấp
 ![Ảnh file đầu vào](images/input-test.png)
 Hình dưới là object khi dùng tool sẽ được trải phẳng từ nhiều cấp về 1 cấp.
@@ -51,7 +62,12 @@ Hình dưới là object khi đã dịch value, object ở dạng trải phẳng
 ![Ảnh file đầu ra dạng thô](images/translated-one-level-object.png)
 Hình dưới là kết quả final khi object đã được trả về hình dạng nhiều cấp ban đầu và dịch thành công
 ![Ảnh file đầu ra dạng hoàn thiện](images/one-level-to-multiple-level-object.png)
-Trường hợp chạy có thể văng exception, tra log tại file resultLog.txt
-![log file](images/log-file.png)
-File này sẽ chứa cả thông tin % file js được dịch
-![loading success](images/log-success-percent-file.png)
+
+## Luồng rút gọn key của object để chỉ tập trung vào dịch value (giảm số ký tự gửi đi)
+
+Hình dưới là json đã được làm đơn giản hóa key
+![Ảnh key được rút gọn](images/simplified-key-before-translate.png)
+Hình dưới là store lưu những key được làm đơn giản hóa
+![Ảnh key được lưu trữ trong object khác](images/simplified-key-store.png)
+Hình dưới là sau khi json đã được khôi phục key ban đầu
+![Ảnh key đã được khôi phục](images/simplified-key-translated-restored.png)
