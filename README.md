@@ -2,8 +2,10 @@
 
 ```
 Đầu tiên vào trong open ai tạo 2 tài khoản để có được 2 secret key,
-sau đó gán vào trong mảng secretKey này, limitLine sẽ là giới hạn để mỗi key thực hiện dịch,
-sau đó đổi chỗ cho nhau.
+sau đó gán vào trong mảng secretKey này, tool sử dụng cơ chế chia file dịch
+thành nhiều queue nhỏ dựa vào config limitLine trong config.js,1 dòng nhiều chữ
+thì để limitLine nhỏ, 1 dòng ít chữ thì để limitLine lớn, 2 tài khoản mỗi khi chạy
+xong số dòng ứng với limitLine sẽ switch cho nhau tránh ratelimit của openai
 ```
 
 ![Ảnh config](images/read-config.png)

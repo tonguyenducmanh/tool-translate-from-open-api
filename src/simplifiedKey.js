@@ -29,7 +29,7 @@ export async function makeSimplifiedObject(data, storeSimplified) {
       });
     }
   } catch (error) {
-    await logFile(error + item, "simplifiedKey: makeSimplifiedObject()");
+    await logFile(error, "simplifiedKey: makeSimplifiedObject()");
   }
 }
 
@@ -62,7 +62,7 @@ export async function undoSimplifiedObject(data, storeSimplified) {
       });
     }
   } catch (error) {
-    await logFile(error + item, "simplifiedKey: undoSimplifiedObject()");
+    await logFile(error, "simplifiedKey: undoSimplifiedObject()");
   }
   return result;
 }
