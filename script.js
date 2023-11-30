@@ -66,10 +66,7 @@ async function runTool() {
               let result = await translateByOpenAI(queueObject, count);
 
               // khôi phục key đã rút gọn của object
-              result = await undoSimplifiedObject(
-                queueObject,
-                simplifiedKeyObject
-              );
+              result = await undoSimplifiedObject(result, simplifiedKeyObject);
               count++;
               // lưu vào file kết quả
               if (result) {

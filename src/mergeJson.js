@@ -15,23 +15,7 @@ export default async function () {
   if (data) {
     // lọc ra toàn bộ các đoạn bắt đầu bằng { và kết thúc bằng } đưa vào mảng
     try {
-      let arr = [];
-      while (data && data.length > 0 && data.length != "") {
-        let startIndex = data.indexOf(config.openCurlyBracket);
-        let nextIndex = data.indexOf(config.closeCurlyBracket) + 1;
-        let temp = data.substring(startIndex, nextIndex);
-        if (temp && temp != "") {
-          arr.push(temp);
-        }
-        data = data.substring(nextIndex);
-        if (
-          startIndex == nextIndex - 1 ||
-          !data.includes(config.openCurlyBracket) ||
-          !data.includes(config.closeCurlyBracket)
-        ) {
-          break;
-        }
-      }
+      let arr = data.toString().replace(/\n/g, " ").match(config.regexJson);
       if (arr) {
         arr.forEach(async (item) => {
           try {

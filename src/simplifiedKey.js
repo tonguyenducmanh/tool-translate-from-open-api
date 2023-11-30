@@ -3,8 +3,7 @@
  * do chat gpt giới hạn 2000 ký tự, nên key không cần thiết sẽ được replace đi
  */
 // thư viện
-import util from "util";
-
+import JSON5 from "json5";
 // file local
 import config from "../config.js";
 import { logFile } from "./logFile.js";
@@ -46,9 +45,12 @@ export async function undoSimplifiedObject(data, storeSimplified) {
       if (typeof data == "object") {
         result = data;
       } else {
-        let temp = data.toString().match(config.regexJson)[0];
+        let temp = data
+          .toString()
+          .replace(/\n/g, " ")
+          .match(config.regexJson)[0];
         if (temp) {
-          result = util.inspect(temp, { depth: Infinity, compact: false });
+          result = JSON5.parse(temp);
         }
       }
       Object.keys(storeSimplified).forEach((key) => {
