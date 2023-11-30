@@ -8,6 +8,7 @@
 [4. Xóa ký tự đặc biệt trong value JSON](#remove-special)\
 [5. Object nhiều level thành 1 object 1 level](#simplified-object)\
 [6. Rút gọn key của object](#short-link)
+[7. Sửa lỗi và merge lại file](#merge-file)
 
 ### <a name="requirement"></a> 1. Yêu cầu
 
@@ -48,11 +49,7 @@ chạy terminal lệnh dưới và đợi kết quả ở file: result.js
 ```
 
 ```
-Lưu ý: sẽ có những lúc chat GPT trả lời ra những câu thừa, thừa các ký tự đặc biệt
-nên khi cố gắng parse từ text object 1 level về file javascript object nhiều level bị lỗi,
-trường hợp lỗi có thể vào trong file result.txt ( nhiều object dạng JSON nhỏ)
-copy vào 1 file js bất kỳ để check các chỗ cú pháp lỗi là sẽ được file object hoàn chỉnh
-# sau khi sửa chạy lệnh dưới để build lại về object nhiều tầng
+Nếu muốn thực hiện merge từ file kết quả result.txt (không gọi lại chatgpt)
 # npm run merge
 ```
 
@@ -93,3 +90,19 @@ Hình dưới là store lưu những key được làm đơn giản hóa
 ![Ảnh key được lưu trữ trong object khác](images/simplified-key-store.png)
 Hình dưới là sau khi json đã được khôi phục key ban đầu
 ![Ảnh key đã được khôi phục](images/simplified-key-translated-restored.png)
+
+### <a name="merge-file"></a>  7. Sửa lỗi và merge lại file
+Mục đích tận dụng số file đã dịch và group lại.
+Sẽ có những lúc chat GPT trả lời ra những câu thừa, thừa các ký tự đặc biệt
+nên khi cố gắng parse từ text object 1 level về file javascript object nhiều level bị lỗi.
+Cách xử lý:
+
+- Copy toàn bộ nội dung trong file result.txt vào 1 file javascript trống
+- Thêm export default ở đầu file javascript
+- Kiểm tra những chỗ báo đỏ trong file javascript và sửa lại cho hết lỗi
+- Copy toàn bộ nội dung vừa sửa vào lại file result.txt (trừ từ "export default")
+- Thực hiện chạy lệnh "npm run merge" để build lại thành file js hoàn chỉnh
+
+Tra log trong resultLog.txt:
+- Trường hợp là lỗi ký tự đặc biệt không json parse được thì thêm ký tự đặc biệt đó vào config phần "specialKeyNeedReplace" để bỏ qua không dịch.
+- Trường hợp object trả về trong result.txt không hoàn chỉnh, dịch sót thì vào lại config.js cấu hình lại limitLine giảm xuống (để dịch ít dòng hơn nhưng đủ ký tự hơn).
