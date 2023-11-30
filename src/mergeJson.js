@@ -1,6 +1,6 @@
 // import thư viện
 import fs from "fs/promises";
-
+import JSON5 from "json5";
 // import file
 import config from "../config.js";
 import { logFile, logFileJS } from "./logFile.js";
@@ -35,11 +35,11 @@ export default async function () {
       if (arr) {
         arr.forEach(async (item) => {
           try {
-            if (item && JSON.parse(item)) {
-              result = { ...result, ...JSON.parse(item) };
+            if (item && JSON5.parse(item)) {
+              result = { ...result, ...JSON5.parse(item) };
             }
           } catch (error) {
-            await logFile(error + item, "mergeJson: JSON.parse()");
+            await logFile(error + item, "mergeJson: JSON5.parse()");
           }
         });
       }

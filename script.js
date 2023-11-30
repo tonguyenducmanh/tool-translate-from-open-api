@@ -1,3 +1,5 @@
+// import thư viện
+import util from "util";
 // import file
 import config from "./config.js";
 import mergeJson from "./src/mergeJson.js";
@@ -7,6 +9,10 @@ import checkFlag from "./src/checkFlag.js";
 import { replaceSpecialKey } from "./src/handleSpecialKey.js";
 import originalLangObject from "./input/originalLangObject.js";
 import testObject from "./input/test.js";
+import {
+  undoSimplifiedObject,
+  makeSimplifiedObject,
+} from "./src/simplifiedKey.js";
 
 // thêm cờ nhận biết có gọi vào chat gpt không
 let notCallChatGPT = checkFlag(config.notCallChatGPT);
@@ -51,12 +57,26 @@ async function runTool() {
                   i * config.limitLine + config.limitLine
                 )
               );
+
+              let simplifiedKeyObject = {};
+
+              // rút gọn key của object để dịch cho nhanh
+              await makeSimplifiedObject(queueObject, simplifiedKeyObject);
+
               let result = await translateByOpenAI(queueObject, count);
+
+              // khôi phục key đã rút gọn của object
+              result = await undoSimplifiedObject(
+                queueObject,
+                simplifiedKeyObject
+              );
               count++;
               // lưu vào file kết quả
               if (result) {
                 countSuccess++;
-                await logResultText(result + config.splitResultChar);
+                await logResultText(
+                  util.inspect(result, { depth: Infinity, compact: false })
+                );
                 // Thêm log đã chạy thành công bao nhiêu %
                 let logSuccessMes = config.logTranslateSuccess.replace(
                   config.keyReplace,
