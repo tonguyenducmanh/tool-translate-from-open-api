@@ -57,10 +57,24 @@ export async function logFileJS(result, output) {
  */
 export async function logResultText(result) {
   try {
-    await fs.writeFile(config.outputPath, result, (err) => {
+    await fs.appendFile(config.outputPath, result, (err) => {
       if (err) throw err;
     });
   } catch (error) {
     console.log("logResultText() error: " + error);
+  }
+}
+
+/**
+ * xoa trang file result.txt
+ * @param {*} result
+ */
+export async function clearResultText() {
+  try {
+    await fs.writeFile(config.outputPath, "", (err) => {
+      if (err) throw err;
+    });
+  } catch (error) {
+    console.log("clearResultText() error: " + error);
   }
 }

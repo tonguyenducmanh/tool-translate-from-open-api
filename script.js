@@ -2,7 +2,7 @@
 import config from "./config.js";
 import mergeJson from "./src/mergeJson.js";
 import translateByOpenAI from "./src/translateByOpenAI.js";
-import { logFile, logResultText } from "./src/logFile.js";
+import { logFile, logResultText, clearResultText } from "./src/logFile.js";
 import checkFlag from "./src/checkFlag.js";
 import { replaceSpecialKey } from "./src/handleSpecialKey.js";
 import originalLangObject from "./input/originalLangObject.js";
@@ -25,7 +25,7 @@ async function runTool() {
     if (!notCallChatGPT) {
       if (config && targetObject) {
         // xóa trắng file output thô đi để ghi nhiều lần
-        await logResultText("");
+        await clearResultText();
         await logFile(config.startLog);
 
         // trải phẳng object nhiều cấp thành object 1 cấp, chỉ giữ lại key value cấp nhỏ nhất
