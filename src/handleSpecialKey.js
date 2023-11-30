@@ -1,3 +1,6 @@
+/**
+ * file xử lý loại bỏ các ký tự đặc biệt tránh gây lỗi json parse, json stringify trước khi gửi đi dịch
+ */
 // import thư viện
 import { v4 as uuidv4 } from "uuid";
 

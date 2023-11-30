@@ -1,3 +1,6 @@
+/**
+ * file thực hiện ghi log, ghi log lỗi, ghi kết quả dạng thô
+ */
 // import thư viện
 import fs from "fs/promises";
 import os from "os";

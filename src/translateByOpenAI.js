@@ -1,3 +1,6 @@
+/**
+ * file gọi lên open ai thực hiện dịch theo lệnh
+ */
 // import thư viện
 import OpenAI from "openai";
 

@@ -1,3 +1,6 @@
+/**
+ * file chạy chính của trương trình
+ */
 // import thư viện
 import util from "util";
 // import file

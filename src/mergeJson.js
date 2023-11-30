@@ -1,3 +1,6 @@
+/**
+ * file gom tất cả các kết quả thô cho vào 1 file javascript dạng export default object
+ */
 // import thư viện
 import fs from "fs/promises";
 import JSON5 from "json5";
