@@ -14,7 +14,7 @@
 ### <a name="requirement"></a> 1. Yêu cầu
 > online
 > 
-> Sử dụng git hub Codespaces để chạy project này
+> Sử dụng github Codespaces để chạy project này
 >
 > offline
 > 
