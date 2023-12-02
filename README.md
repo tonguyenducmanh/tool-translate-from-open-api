@@ -118,4 +118,4 @@ Tra log trong resultLog.txt:
 Đừng quá tin tưởng vào chatGPT, có thể nó dịch bị double key hoặc bị miss key.
 Sử dụng tool ở link bên dưới để double check lại xem đã dịch được bao nhiêu key của file rồi, key mà dịch xong vẫn có value giống key gốc cũng sẽ hiển thị. Sau khi đã chạy và xuất ra được object các key chưa dịch thì cho lại vào tool dịch này trong file originalLangObject.js và chạy "npm run serve" để dịch tiếp; rồi lại cho vào phần addmore của tool dưới ....
 
-> https://github.com/tonguyenducmanh/tool-mapping-json-v2
+> https://github.com/tonguyenducmanh/mapping-json-v2
