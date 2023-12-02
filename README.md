@@ -1,4 +1,4 @@
-## Tool giúp dịch value của object sang ngôn ngữ đích bằng openAI
+## Tool giúp dịch value của object trong javascript sang ngôn ngữ đích bằng openAI
 
 ### Mục lục
 
