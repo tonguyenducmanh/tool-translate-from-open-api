@@ -13,7 +13,9 @@
 
 ### <a name="requirement"></a> 1. Yêu cầu
 > online
+> 
 > Sử dụng git hub Codespaces để chạy project này
+>
 > offline
 > Máy tính có 2 tài khoản openai, lưu lại secretkey, cho vào config.js
 >
