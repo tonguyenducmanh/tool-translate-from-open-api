@@ -12,7 +12,9 @@
 [8. Kiểm tra xem đã dịch được hết object chưa](#double-check)
 
 ### <a name="requirement"></a> 1. Yêu cầu
-
+> online
+> Sử dụng git hub Codespaces để chạy project này
+> offline
 > Máy tính có 2 tài khoản openai, lưu lại secretkey, cho vào config.js
 >
 > Cài đặt nodejs >= 16.0.0
